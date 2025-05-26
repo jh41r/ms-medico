@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Medico {
+public class Especialidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,14 +23,13 @@ public class Medico {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellido")
-    private String apellido;
+    @Column(name = "descripcion")
+    private String descripcion;
 
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "codigo")
+    private String codigo;
+
+    @OneToMany(mappedBy = "especialidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Turno> turnos;
-
-    @ManyToOne
-    @JoinColumn(name ="especialidad_id", nullable = false)
-    private Especialidad especialidad;
+    private Set<Medico> medicos;
 }
